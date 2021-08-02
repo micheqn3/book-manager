@@ -1,6 +1,9 @@
-/* Allows connection to MySQL database */
+/* Initialize connection to MySQL database */
 
+// Import sequelize
 const Sequelize = require('sequelize');
+
+// Import dotenv to read .env file
 require('dotenv').config();
 
 const sequelize = new Sequelize(
