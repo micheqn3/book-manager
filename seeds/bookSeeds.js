@@ -22,6 +22,11 @@ const books = [
         "author": "F. Scott Fitzgerald",
         "description": "The tragic story of Jay Gatsby, a self-made millionaire, and his pursuit of Daisy Buchanan."
     },
+    {
+        "title": "Eat Pray Love",
+        "author": "Elizabeth Gilbert",
+        "description": "Liz embarks on a quest of self-discovery that takes her to Italy, India and Bali."
+    },
 ]
 
 

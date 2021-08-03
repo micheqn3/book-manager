@@ -60,7 +60,7 @@ class Queries {
             data.forEach(val => array.push(val.id.toString()));
             return array;
         } catch (error) {
-            console.log('There was an error in retrieving all book IDs');
+            console.log('There was an error in retrieving all book IDs.');
         }
     }
 
