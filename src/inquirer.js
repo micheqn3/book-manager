@@ -116,14 +116,15 @@ const keywordPrompt = [
         message: 'Type in one or more keywords to search for \n\n     Search:',
         type: 'input',
         prefix: '',
-        filter: capEachWord
+        filter: capEachWord,
+        validate: validateInput
     }
 ]
 
 const searchIDPrompt = [
     {
         name: 'id',
-        message: 'Book ID:',
+        message: '\nBook ID:',
         type: 'input',
         prefix: '',
     }

@@ -92,10 +92,21 @@ const searchBook = async () => {
     if (!results.length > 0) {
         console.log('\nThere were no books that match your search.');
         startPrompts();
-    } else {
-        console.log('\nThe following books matched your query. Enter the book ID to see more details, or <Enter> to return.')
-        await db.formatBookDataQ(results);
-    }
+        return;
+    } 
+    let bookID;
+    console.log('\nThe following books matched your query. Enter the book ID to see more details, or <Enter> to return.\n')
+    db.formatBookDataQ(results);
+    do {
+        bookID = await inquirer.prompt(searchIDPrompt);
+        if (bookID.id === "") {
+            startPrompts();
+            return;
+        } 
+        const book = await db.getOneBookQ(bookID.id);
+        db.formatBookDetailsQ(book);
+
+    } while (bookID.id.length > 0);
 }
 
 // Displays all books and prompts user to edit book until they press enter
