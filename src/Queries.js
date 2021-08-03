@@ -95,7 +95,7 @@ class Queries {
         }
         return results;
         } catch (error) {
-            console.log('There was an error retrieving all books.');
+            console.log('There was an error in retrieving all books.');
         }
     }
 
@@ -107,7 +107,7 @@ class Queries {
                     id: id
                 }
             })
-            console.log(`\nBook [${id}] Saved`);
+            console.log(`\nBook saved`);
         } catch (error) {
             console.log('There was an error in updating.');
         }
