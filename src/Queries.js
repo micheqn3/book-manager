@@ -5,8 +5,8 @@ const Book = require('../models/Book');
 
 class Queries {
 
-    // Displays all books in DB with specified header
-    async showBooksQ(operation) {
+    // Displays specified header for CRUD operation
+    async showHeaderQ(operation) {
         switch (operation) {
             case 'view':
                 console.log('\n= = = = View Books = = = =\n');
@@ -20,7 +20,10 @@ class Queries {
             default:
                 console.log('There was an error.');
         }
+    }
 
+    // Displays all books
+    async displayBooksQ() {
         try {
             const data = await Book.findAll();
             this.formatBookDataQ(data);

@@ -49,20 +49,22 @@ const userChoice = (choice) => {
 
 // Display all books in DB
 const getAllBooks = async () => {
-    await db.showBooksQ('view');
+    await db.showHeaderQ('view');
+    await db.displayBooksQ();
     startPrompts();
 }
 
 // Add a book to the DB
 const addBook = async () => {
-    await db.showBooksQ('add');
+    await db.showHeaderQ('add');
     const data = await inquirer.prompt(addPrompt);
 }
 
 // Displays all books and prompts user to edit book. 
 // Passes in array of current book IDs to validate input
 const editBook = async () => {
-    await db.showBooksQ('edit');
+    await db.showHeaderQ('edit');
+    await db.displayBooksQ();
     const currentIDArray = await db.getAllBookIDsQ();
     const bookID = await inquirer.prompt(bookIDPrompt(currentIDArray));
 
