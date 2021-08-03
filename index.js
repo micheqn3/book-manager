@@ -11,16 +11,17 @@ const Queries = require('./src/Queries');
 const db = new Queries;
 
 // Starts the inquirer prompts
-const startPrompts = () => {
-    inquirer.prompt(menu).then(answers => {
-        userChoice(answers.choice);
-    }).catch(error => {
+const startPrompts = async () => {
+    try {
+        const menuChoice = await inquirer.prompt(menu);
+        userChoice(menuChoice.choice);
+    } catch (error) {
         if (error.isTtyError) {
             console.log("The prompt couldn't be rendered in this current environment.");
         } else {
             console.log("Something else went wrong");
         }
-    })
+    }
 }
 
 // Redirects the menu based on the user's input
