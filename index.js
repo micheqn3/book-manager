@@ -4,7 +4,7 @@
 const inquirer = require('inquirer');
 const sequelize = require('./config/connection');
 const Book = require('./models/Book');
-const {menu, bookIDPrompt, editPrompt, addPrompt} = require('./src/inquirer');
+const {menu, bookIDPrompt, editPrompt, addPrompt, viewAllPrompt} = require('./src/inquirer');
 
 // Import class to use query methods
 const Queries = require('./src/Queries');
@@ -51,7 +51,10 @@ const userChoice = (choice) => {
 const getAllBooks = async () => {
     await db.showHeaderQ('view');
     await db.displayBooksQ();
-    startPrompts();
+    const data = await inquirer.prompt(viewAllPrompt);
+    console.log(data.id)
+
+    //startPrompts();
 }
 
 // Add a book to the DB

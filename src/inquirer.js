@@ -52,6 +52,16 @@ const addPrompt = [
     }     
 ]
 
+const viewAllPrompt = [
+    {
+        name: 'id',
+        message: 'To view details enter the book ID, to return press <Enter>.',
+        default: '',
+        prefix: '',
+    }     
+
+]
+
 // Takes in the book data from the user and returns a prompt with book values
 const editPrompt = (data) => {
     return [
@@ -101,4 +111,4 @@ const bookIDPrompt = (array) => {
 }
 
 
-module.exports = {menu, addPrompt, bookIDPrompt, editPrompt}
+module.exports = {menu, addPrompt, bookIDPrompt, editPrompt, viewAllPrompt}
