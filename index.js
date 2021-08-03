@@ -4,7 +4,7 @@
 const inquirer = require('inquirer');
 const sequelize = require('./config/connection');
 const Book = require('./models/Book');
-const {menu, bookIDPrompt, editPrompt} = require('./src/inquirer');
+const {menu, bookIDPrompt, editPrompt, addPrompt} = require('./src/inquirer');
 
 // Import class to use query methods
 const Queries = require('./src/Queries');
@@ -30,7 +30,7 @@ const userChoice = (choice) => {
             getAllBooks();
             break;
         case '2) Add a book': 
-            console.log('*Add a book');
+            addBook();
             break;
         case '3) Edit a book': 
             editBook()
@@ -53,8 +53,10 @@ const getAllBooks = async () => {
     startPrompts();
 }
 
+// Add a book to the DB
 const addBook = async () => {
-
+    await db.showBooksQ('add');
+    const data = await inquirer.prompt(addPrompt);
 }
 
 // Displays all books and prompts user to edit book. 

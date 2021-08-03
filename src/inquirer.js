@@ -20,6 +20,27 @@ const menu = [
     }
 ]
 
+const addPrompt = [
+    {
+        name: 'title',
+        message: '\nPlease enter the following information: \n      Title:',
+        default: '',
+        prefix: '',
+    },
+    {
+        name: 'author',
+        message: '     Author:',
+        default: '',
+        prefix: '',
+    },
+    {
+        name: 'description',
+        message: '     Description:',
+        default: '',
+        prefix: '',
+    }     
+]
+
 // Takes in the current array of IDs in the DB
 // Returns an inquirer prompt with validation for the ID and checks if the user pressed enter to return to menu
 const bookIDPrompt = (array) => {
@@ -69,5 +90,4 @@ const editPrompt = (data) => {
 }
 
 
-
-module.exports = {menu, bookIDPrompt, editPrompt}
+module.exports = {menu, addPrompt, bookIDPrompt, editPrompt}
