@@ -63,10 +63,10 @@ const addPrompt = [
     }     
 ]
 
-const viewAllPrompt = [
+const viewDetailPrompt = [
     {
         name: 'id',
-        message: 'To view details enter the book ID, to return press <Enter>.',
+        message: '\nTo view details enter the book ID, to return press <Enter>.',
         default: '',
         prefix: '',
     }     
@@ -121,4 +121,4 @@ const bookIDPrompt = (array) => {
     ]
 }
 
-module.exports = {menu, addPrompt, bookIDPrompt, editPrompt, viewAllPrompt}
+module.exports = {menu, addPrompt, bookIDPrompt, editPrompt, viewDetailPrompt}

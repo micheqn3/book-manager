@@ -48,9 +48,20 @@ class Queries {
             const data = await Book.findAll();
             data.forEach(val => array.push(val.id.toString()));
             return array;
-
         } catch (error) {
             console.log('There was an error in retrieving all book IDs');
+        }
+    }
+
+    isBookIDInDB(id, array) {
+        if (id === "") {
+            return;
+        } else {
+            if (!array.includes(id)) {
+                return false;
+            } else {
+                return true;
+            }
         }
     }
 

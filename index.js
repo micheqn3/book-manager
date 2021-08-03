@@ -4,7 +4,7 @@
 const inquirer = require('inquirer');
 const sequelize = require('./config/connection');
 const Book = require('./models/Book');
-const {menu, bookIDPrompt, editPrompt, addPrompt, viewAllPrompt} = require('./src/inquirer');
+const {menu, bookIDPrompt, editPrompt, addPrompt, viewDetailPrompt} = require('./src/inquirer');
 
 // Import class to use query methods
 const Queries = require('./src/Queries');
@@ -48,14 +48,29 @@ const userChoice = (choice) => {
     }
 }
 
-// Display all books in DB
+// View all books and continues to ask the user to view details until they press enter
 const getAllBooks = async () => {
     await db.showHeaderQ('view');
     await db.displayBooksQ();
-    const data = await inquirer.prompt(viewAllPrompt);
-    console.log(data.id)
+    let data;
 
-    //startPrompts();
+    do {
+        // Retrieves current book IDs. If the user does not click enter, compare current book IDs with user input
+        // If ID is valid, display book details
+        data = await inquirer.prompt(viewDetailPrompt);
+        const bookIDs = await db.getAllBookIDsQ();
+        if (data.id === "") {
+            startPrompts();
+            return;
+        }
+        const isInDB = db.isBookIDInDB(data.id, bookIDs);
+        if (!isInDB) {
+            console.log('\nPlease enter a valid ID.');
+        } else {
+            // Make query here
+        }
+    } while (data.id.length > 0);
+    startPrompts();
 }
 
 // Add a book to the DB
