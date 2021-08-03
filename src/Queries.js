@@ -20,8 +20,13 @@ class Queries {
             default:
                 console.log('There was an error.');
         }
-        const data = await Book.findAll();
-        this.formatBookData(data);
+        
+        try {
+            const data = await Book.findAll();
+            this.formatBookData(data);
+        } catch (error) {
+            console.log('There was an error retrieving all books.')
+        }
     }
 
     // Formats book data
@@ -35,16 +40,25 @@ class Queries {
 
     // Retrieves all book ID's and pushes into array
     async getAllBookIDs() {
-        let array = [];
-        const data = await Book.findAll();
-        data.forEach(val => array.push(val.id.toString()));
-        return array;
+        try {
+            let array = [];
+            const data = await Book.findAll();
+            data.forEach(val => array.push(val.id.toString()));
+            return array;
+
+        } catch (error) {
+            console.log('There was an error in retrieving all book IDs');
+        }
     }
 
     // Retrieves one book by its primary key
     async getOneBook(id) {
-        const data = await Book.findByPk(id);
-        return data;
+        try {
+            const data = await Book.findByPk(id);
+            return data;
+        } catch (error) {
+            console.log('There was an error in retrieving the book data.');
+        }
     }
 
     // Edit a book 
@@ -57,7 +71,7 @@ class Queries {
             })
             console.log(`\nBook [${id}] Saved`);
         } catch (error) {
-            console.log('There was an error in updating.')
+            console.log('There was an error in updating.');
         }
     }
 
