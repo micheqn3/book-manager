@@ -83,27 +83,34 @@ const addBook = async () => {
     startPrompts();
 }
 
-// Displays all books and prompts user to edit book. 
-// Passes in array of current book IDs to validate input
+// Displays all books and prompts user to edit book until they press enter
 const editBook = async () => {
     await db.showHeaderQ('edit');
     await db.displayBooksQ();
-    const currentIDArray = await db.getAllBookIDsQ();
-    const bookID = await inquirer.prompt(bookIDPrompt(currentIDArray));
+    let data;
+    do {
+        // Retrieves current book IDs. If the user does not click enter, compare current book IDs with user input
+        // If ID is valid, display book details
+        data = await inquirer.prompt(bookIDPrompt);
+        const currentIDArray = await db.getAllBookIDsQ();
+        if (data.id === "") {
+            startPrompts();
+            return;
+        }
+        const isInDB = db.isBookIDInDB(data.id, currentIDArray);
+        if (!isInDB) {
+            console.log('\nPlease enter a valid ID.');
+        } else {
+            // Retrieves book data and pass it to editPrompt to render inquirer prompt values to edit
+            const bookData = await db.getOneBookQ(data.id);
+            const updatedAns = await inquirer.prompt(editPrompt(bookData));
 
-    // If the user presses enter to exit, go back to menu
-    if (!bookID.id) { 
-        startPrompts();
-    } else {
-        // Retrieves book data and pass it to editPrompt to render inquirer prompt values to edit
-        const bookData = await db.getOneBookQ(bookID.id);
-        const updatedAns = await inquirer.prompt(editPrompt(bookData));
-
-        // Pass only updated columns into update query
-        const updatedVals = db.removeEmptyKeyValQ(updatedAns);
-        await db.editBookQ(bookID.id, updatedVals);
-        startPrompts();
-    }
+            // Pass only updated columns into update query
+            const updatedVals = db.removeEmptyKeyValQ(updatedAns);
+            await db.editBookQ(data.id, updatedVals);
+        }
+    } while (data.id.length > 0);
+    startPrompts();
 }
 
 // Connects to the db and starts the prompts

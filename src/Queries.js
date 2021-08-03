@@ -49,7 +49,7 @@ class Queries {
         console.log(`     Description: ${val.description}`);
     }
 
-    // Retrieves all book ID's and pushes into array
+    // Retrieves all book IDs and pushes into array
     async getAllBookIDsQ() {
         try {
             let array = [];
@@ -61,6 +61,7 @@ class Queries {
         }
     }
 
+    // Checks if the book ID the user input is in the DB
     isBookIDInDB(id, array) {
         if (!array.includes(id)) {
             return false;

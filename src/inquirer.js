@@ -36,6 +36,7 @@ const menu = [
     }
 ]
 
+// Add book prompt
 const addPrompt = [
     {
         name: 'title',
@@ -63,6 +64,7 @@ const addPrompt = [
     }     
 ]
 
+// View book details prompt
 const viewDetailPrompt = [
     {
         name: 'id',
@@ -97,28 +99,14 @@ const editPrompt = (data) => {
     ]
 }
 
-// Takes in the current array of IDs in the DB
-// Returns an inquirer prompt with validation for the ID and checks if the user pressed enter to return to menu
-const bookIDPrompt = (array) => {
-    const checkForValidID = (input) => {
-        // Checks if the user pressed enter
-        if (!input) {
-            return true;
-        } else if (!array.includes(input)) {
-            return "Please enter a valid book ID.";
-    
-        }
-        return true;
+// Edit book prompt
+const bookIDPrompt = [
+    {
+        name: 'id',
+        message: '\nEnter the book ID of the book you want to edit; to return press <Enter>. \n\nBook ID:',
+        type: 'input',
+        prefix: '',
     }
-    return [
-        {
-            name: 'id',
-            message: '\nEnter the book ID of the book you want to edit; to return press <Enter>. \n\nBook ID:',
-            type: 'input',
-            prefix: '',
-            validate: checkForValidID
-        }
-    ]
-}
+]
 
 module.exports = {menu, addPrompt, bookIDPrompt, editPrompt, viewDetailPrompt}
