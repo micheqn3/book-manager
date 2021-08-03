@@ -113,9 +113,10 @@ const bookIDPrompt = [
 const keywordPrompt = [
     {
         name: 'search',
-        message: 'Type in one or more keywords to search for \n\nSearch:',
+        message: 'Type in one or more keywords to search for \n\n     Search:',
         type: 'input',
         prefix: '',
+        filter: capEachWord
     }
 ]
 

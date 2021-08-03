@@ -34,10 +34,10 @@ const userChoice = (choice) => {
             addBook();
             break;
         case '3) Edit a book': 
-            editBook()
+            editBook();
             break;
         case '4) Search for a book':
-            console.log('*Search for a book');
+            searchBook();
             break;
         case '5) Save and exit':
             console.log('\nLibrary saved.');
@@ -81,6 +81,14 @@ const addBook = async () => {
     const data = await inquirer.prompt(addPrompt);
     await db.addBookQ(data);
     startPrompts();
+}
+
+// Search for keywords
+const searchBook = async () => {
+    await db.showHeaderQ('search');
+    const data = await inquirer.prompt(keywordPrompt);
+    console.log(data.search);
+
 }
 
 // Displays all books and prompts user to edit book until they press enter

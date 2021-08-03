@@ -17,6 +17,9 @@ class Queries {
             case 'edit': 
                 console.log('\n= = = = Edit a Book = = = =\n');
                 break;
+            case 'search': 
+                console.log('\n= = = = Search = = = =\n');
+                break;
             default:
                 console.log('There was an error.');
         }
@@ -104,7 +107,7 @@ class Queries {
         }
     }
 
-    // Removes empty/unedited key value pairs from object
+    // Removes empty/unedited key value pairs from object to insert into book update
     removeEmptyKeyValQ = (obj) => {
         let newObj = {};
         Object.keys(obj).forEach((prop) => {
