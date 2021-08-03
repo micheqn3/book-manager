@@ -54,14 +54,10 @@ class Queries {
     }
 
     isBookIDInDB(id, array) {
-        if (id === "") {
-            return;
+        if (!array.includes(id)) {
+            return false;
         } else {
-            if (!array.includes(id)) {
-                return false;
-            } else {
-                return true;
-            }
+            return true;
         }
     }
 
