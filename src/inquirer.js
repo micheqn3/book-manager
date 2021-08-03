@@ -11,6 +11,14 @@ const validateInput = (input) => {
     return true;
 }
 
+// Capitalizes every first letter in each word in a string + removes whitespace for consistency 
+// when adding to DB
+const capEachWord = (str) => { 
+    return str.trim().split(" ").map(word => {
+      return word.substring(0,1).toUpperCase() + word.substring(1)
+    }).join(" ");
+}
+
 // Menu choices
 const menu = [ 
     { 
@@ -34,21 +42,24 @@ const addPrompt = [
         message: '\nPlease enter the following information: \n      Title:',
         default: '',
         prefix: '',
-        validate: validateInput
+        validate: validateInput,
+        filter: capEachWord
     },
     {
         name: 'author',
         message: '     Author:',
         default: '',
         prefix: '',
-        validate: validateInput
+        validate: validateInput,
+        filter: capEachWord
     },
     {
         name: 'description',
         message: '     Description:',
         default: '',
         prefix: '',
-        validate: validateInput
+        validate: validateInput,
+        filter: capEachWord
     }     
 ]
 
@@ -95,7 +106,7 @@ const bookIDPrompt = (array) => {
             return true;
         } else if (!array.includes(input)) {
             return "Please enter a valid book ID.";
-
+    
         }
         return true;
     }
@@ -109,6 +120,5 @@ const bookIDPrompt = (array) => {
         }
     ]
 }
-
 
 module.exports = {menu, addPrompt, bookIDPrompt, editPrompt, viewAllPrompt}
