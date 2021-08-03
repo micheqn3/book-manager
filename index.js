@@ -6,6 +6,10 @@ const sequelize = require('./config/connection');
 const Book = require('./models/Book');
 const menu = require('./src/inquirer');
 
+// Import class to use query methods
+const Queries = require('./src/Queries');
+const db = new Queries;
+
 const startPrompts = () => {
     inquirer.prompt(menu).then(answers => {
         userChoice(answers.choice);
@@ -22,7 +26,7 @@ const startPrompts = () => {
 const userChoice = (choice) => {
     switch (choice) {
         case '1) View all books':
-            console.log('*View all books');
+            getAllBooks();
             break;
         case '2) Add a book': 
             console.log('*Add a book');
@@ -34,11 +38,16 @@ const userChoice = (choice) => {
             console.log('*Search for a book');
             break;
         case '5) Save and exit':
-            console.log('Save and exit');
+            console.log('*Save and exit');
             break;
         default: 
             console.log('There was an error.');
     }
+}
+
+const getAllBooks = async () => {
+    await db.showBooks('view');
+    startPrompts();
 }
 
 // Connects to the db and starts the prompts
