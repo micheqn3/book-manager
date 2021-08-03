@@ -87,8 +87,7 @@ const addBook = async () => {
 const searchBook = async () => {
     await db.showHeaderQ('search');
     const data = await inquirer.prompt(keywordPrompt);
-    console.log(data.search);
-
+    const results = await db.searchQ(data.search);
 }
 
 // Displays all books and prompts user to edit book until they press enter

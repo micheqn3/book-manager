@@ -52,7 +52,7 @@ class Queries {
         console.log(`     Description: ${val.description}`);
     }
 
-    // Retrieves all book IDs and pushes into array
+    // Retrieves all book IDs and pushes into array for validating user input
     async getAllBookIDsQ() {
         try {
             let array = [];
@@ -80,6 +80,22 @@ class Queries {
             return data;
         } catch (error) {
             console.log('There was an error in retrieving the book data.');
+        }
+    }
+
+    // Retrieves all books in the DB and filter for search terms
+    async searchQ(text) {
+        try {
+            let results = [];
+            const data = await Book.findAll();
+            for (let i = 0 ; i < data.length ; i++) {
+                if (data[i].author.includes(text) || data[i].title.includes(text) || data[i].description.includes(text) ) {
+                results.push(data[i]);
+            }
+        }
+        return results;
+        } catch (error) {
+            console.log('There was an error retrieving all books.');
         }
     }
 
