@@ -50,10 +50,15 @@ const userChoice = (choice) => {
 
 // View all books and continues to ask the user to view details until they press enter
 const getAllBooks = async () => {
+    const numofBooks = await db.getAllBookIDsQ();
+    if (numofBooks.length === 0 ) {
+        console.log('\nThere are no books in the DB.');
+        startPrompts();
+        return;
+    }
     await db.showHeaderQ('view');
     await db.displayBooksQ();
     let data;
-
     do {
         // Retrieves current book IDs. If the user does not click enter, compare current book IDs with user input
         // If ID is valid, display book details
@@ -67,7 +72,7 @@ const getAllBooks = async () => {
         if (!isInDB) {
             console.log('\nPlease enter a valid ID.');
         } else {
-            // Make query here
+            // Retrieve single book data and display to user
             const book = await db.getOneBookQ(data.id);
             db.formatBookDetailsQ(book);
         }
@@ -98,6 +103,8 @@ const searchBook = async () => {
     console.log('\nThe following books matched your query. Enter the book ID to see more details, or <Enter> to return.\n')
     db.formatBookDataQ(results);
     do {
+        // Allow the user to keep entering book IDs to view details
+        // If they press enter, they will be taken back to the menu
         bookID = await inquirer.prompt(searchIDPrompt);
         if (bookID.id === "") {
             startPrompts();

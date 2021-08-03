@@ -72,7 +72,6 @@ const viewDetailPrompt = [
         default: '',
         prefix: '',
     }     
-
 ]
 
 // Takes in the book data from the user and returns a prompt with book values
