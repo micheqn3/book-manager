@@ -7,27 +7,38 @@ class Queries {
 
     // Displays all books in DB with specified header
     async showBooks(operation) {
-        const data = await Book.findAll();
         switch (operation) {
             case 'view':
-                console.log('\n=== View Books ===\n');
+                console.log('\n= = = = View Books = = = =\n');
                 break;
             case 'add':
-                console.log('\n=== Add a Book ===\n');
+                console.log('\n= = = = Add a Book = = = =\n');
                 break;
             case 'edit': 
-                console.log('\n=== Edit a Book ===\n');
+                console.log('\n= = = = Edit a Book = = = =\n');
                 break;
             default:
                 console.log('There was an error.');
         }
+        const data = await Book.findAll();
         this.formatBookData(data);
     }
+
     // Formats book data
     formatBookData(data) { 
-        data.forEach((val) => {
-            console.log(`[${val.id}] ${val.title}`);
-        })
+        if (data.length > 0) {
+            data.forEach(val =>  console.log(`     [${val.id}] ${val.title}`));
+        } else {
+            console.log('\nThere are no books in the DB.');
+        }
+    }
+
+    // Retrieves all book ID's and pushes into array
+    async getAllBookIDs() {
+        let array = [];
+        const data = await Book.findAll();
+        data.forEach(val => array.push(val.id.toString()));
+        return array;
     }
 }
 

@@ -4,7 +4,7 @@
 const inquirer = require('inquirer');
 const sequelize = require('./config/connection');
 const Book = require('./models/Book');
-const menu = require('./src/inquirer');
+const {menu, bookIDPrompt, editPrompt} = require('./src/inquirer');
 
 // Import class to use query methods
 const Queries = require('./src/Queries');
@@ -24,7 +24,7 @@ const startPrompts = () => {
 
 // Redirects the menu based on the user's input
 const userChoice = (choice) => {
-    switch (choice) {
+    switch (choice.trim()) {
         case '1) View all books':
             getAllBooks();
             break;
@@ -32,7 +32,7 @@ const userChoice = (choice) => {
             console.log('*Add a book');
             break;
         case '3) Edit a book': 
-            console.log('*Edit a book');
+            editBook()
             break;
         case '4) Search for a book':
             console.log('*Search for a book');
@@ -48,6 +48,23 @@ const userChoice = (choice) => {
 const getAllBooks = async () => {
     await db.showBooks('view');
     startPrompts();
+}
+
+const editBook = async () => {
+    await db.showBooks('edit');
+    let currentIDArray = await db.getAllBookIDs();
+    inquirer.prompt(bookIDPrompt(currentIDArray)).then(answers => {
+        if (!answers.id) {
+            startPrompts();
+        } else {
+            // Get answers.id book data
+            inquirer.prompt(editPrompt).then(answers => {
+                console.log(answers.title)
+                console.log(answers.author)
+                console.log(answers.description)
+            })
+        }
+    })
 }
 
 // Connects to the db and starts the prompts
