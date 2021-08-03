@@ -82,18 +82,21 @@ const editPrompt = (data) => {
             message: `\nInput the following information. To leave a field unchanged, hit <Enter> \n\n      Title [${data.title}]:`,
             default: '',
             prefix: '',
+            filter: capEachWord,
         },
         {
             name: 'author',
             message: `     Author: [${data.author}]:`,
             default: '',
             prefix: '',
+            filter: capEachWord,
         },
         {
             name: 'description',
             message: `     Description: [${data.description}]:`,
             default: '',
             prefix: '',
+            filter: capEachWord,
         },
     ]
 }
