@@ -6,7 +6,7 @@ const Book = require('../models/Book');
 class Queries {
 
     // Displays all books in DB with specified header
-    async showBooks(operation) {
+    async showBooksQ(operation) {
         switch (operation) {
             case 'view':
                 console.log('\n= = = = View Books = = = =\n');
@@ -23,14 +23,14 @@ class Queries {
 
         try {
             const data = await Book.findAll();
-            this.formatBookData(data);
+            this.formatBookDataQ(data);
         } catch (error) {
-            console.log('There was an error retrieving all books.')
+            console.log('There was an error retrieving all books.');
         }
     }
 
     // Formats book data
-    formatBookData(data) { 
+    formatBookDataQ(data) { 
         if (data.length > 0) {
             data.forEach(val =>  console.log(`     [${val.id}] ${val.title}`));
         } else {
@@ -39,7 +39,7 @@ class Queries {
     }
 
     // Retrieves all book ID's and pushes into array
-    async getAllBookIDs() {
+    async getAllBookIDsQ() {
         try {
             let array = [];
             const data = await Book.findAll();
@@ -52,7 +52,7 @@ class Queries {
     }
 
     // Retrieves one book by its primary key
-    async getOneBook(id) {
+    async getOneBookQ(id) {
         try {
             const data = await Book.findByPk(id);
             return data;
@@ -62,7 +62,7 @@ class Queries {
     }
 
     // Edit a book 
-    async editBook(id, array) {
+    async editBookQ(id, array) {
         try {
             await Book.update(array, {
                 where: {
@@ -76,7 +76,7 @@ class Queries {
     }
 
     // Removes empty/unedited key value pairs from object
-    removeEmptyKeyVal = (obj) => {
+    removeEmptyKeyValQ = (obj) => {
         let newObj = {};
         Object.keys(obj).forEach((prop) => {
             if (obj[prop] !== '') {

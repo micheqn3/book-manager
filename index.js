@@ -49,15 +49,19 @@ const userChoice = (choice) => {
 
 // Display all books in DB
 const getAllBooks = async () => {
-    await db.showBooks('view');
+    await db.showBooksQ('view');
     startPrompts();
+}
+
+const addBook = async () => {
+
 }
 
 // Displays all books and prompts user to edit book. 
 // Passes in array of current book IDs to validate input
 const editBook = async () => {
-    await db.showBooks('edit');
-    const currentIDArray = await db.getAllBookIDs();
+    await db.showBooksQ('edit');
+    const currentIDArray = await db.getAllBookIDsQ();
     const bookID = await inquirer.prompt(bookIDPrompt(currentIDArray));
 
     // If the user presses enter to exit, go back to menu
@@ -65,12 +69,12 @@ const editBook = async () => {
         startPrompts();
     } else {
         // Retrieves book data and pass it to editPrompt to render inquirer prompt values to edit
-        const bookData = await db.getOneBook(bookID.id);
+        const bookData = await db.getOneBookQ(bookID.id);
         const updatedAns = await inquirer.prompt(editPrompt(bookData));
 
         // Pass only updated columns into update query
-        const updatedVals = db.removeEmptyKeyVal(updatedAns);
-        await db.editBook(bookID.id, updatedVals);
+        const updatedVals = db.removeEmptyKeyValQ(updatedAns);
+        await db.editBookQ(bookID.id, updatedVals);
         startPrompts();
     }
 }
@@ -80,7 +84,7 @@ const connection = async () => {
     try {
         await sequelize.sync({ force: false });
         console.log('DB connection is successful.\n');
-        const numofBooks = await db.getAllBookIDs();
+        const numofBooks = await db.getAllBookIDsQ();
         console.log(`Loaded ${numofBooks.length} books into the library`);
         startPrompts();
     } catch (error) {
