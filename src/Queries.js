@@ -20,7 +20,7 @@ class Queries {
             default:
                 console.log('There was an error.');
         }
-        
+
         try {
             const data = await Book.findAll();
             this.formatBookData(data);

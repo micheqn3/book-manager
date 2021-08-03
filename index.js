@@ -39,7 +39,8 @@ const userChoice = (choice) => {
             console.log('*Search for a book');
             break;
         case '5) Save and exit':
-            console.log('*Save and exit');
+            console.log('\nLibrary saved.');
+            process.exit();
             break;
         default: 
             console.log('There was an error.');
@@ -75,9 +76,18 @@ const editBook = async () => {
 }
 
 // Connects to the db and starts the prompts
-sequelize.sync({ force: false }).then(() => {
-    console.log('DB connection is successful.\n');
-    startPrompts();
-}, (error) => {
-    console.log(`There was an issue with the DB connection: ${error}`);
-});
+const connection = async () => {
+    try {
+        await sequelize.sync({ force: false });
+        console.log('DB connection is successful.\n');
+        const numofBooks = await db.getAllBookIDs();
+        console.log(`Loaded ${numofBooks.length} books into the library`);
+        startPrompts();
+    } catch (error) {
+        console.log(`There was an issue with the DB connection: ${error}`);
+    }
+}
+
+connection();
+
+
