@@ -4,7 +4,7 @@
 const inquirer = require('inquirer');
 const sequelize = require('./config/connection');
 const Book = require('./models/Book');
-const {menu, bookIDPrompt, editPrompt, addPrompt, viewDetailPrompt, keywordPrompt} = require('./src/inquirer');
+const {menu, bookIDPrompt, editPrompt, addPrompt, viewDetailPrompt, keywordPrompt, searchIDPrompt} = require('./src/inquirer');
 
 // Import class to use query methods
 const Queries = require('./src/Queries');
@@ -88,6 +88,14 @@ const searchBook = async () => {
     await db.showHeaderQ('search');
     const data = await inquirer.prompt(keywordPrompt);
     const results = await db.searchQ(data.search);
+
+    if (!results.length > 0) {
+        console.log('\nThere were no books that match your search.');
+        startPrompts();
+    } else {
+        console.log('\nThe following books matched your query. Enter the book ID to see more details, or <Enter> to return.')
+        await db.formatBookDataQ(results);
+    }
 }
 
 // Displays all books and prompts user to edit book until they press enter

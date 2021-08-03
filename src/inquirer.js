@@ -120,4 +120,13 @@ const keywordPrompt = [
     }
 ]
 
-module.exports = {menu, addPrompt, bookIDPrompt, editPrompt, viewDetailPrompt, keywordPrompt}
+const searchIDPrompt = [
+    {
+        name: 'id',
+        message: 'Book ID:',
+        type: 'input',
+        prefix: '',
+    }
+]
+
+module.exports = {menu, addPrompt, bookIDPrompt, editPrompt, viewDetailPrompt, keywordPrompt, searchIDPrompt}
