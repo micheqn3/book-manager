@@ -40,6 +40,37 @@ class Queries {
         data.forEach(val => array.push(val.id.toString()));
         return array;
     }
+
+    // Retrieves one book by its primary key
+    async getOneBook(id) {
+        const data = await Book.findByPk(id);
+        return data;
+    }
+
+    // Edit a book 
+    async editBook(id, array) {
+        try {
+            await Book.update(array, {
+                where: {
+                    id: id
+                }
+            })
+            console.log(`\nBook [${id}] Saved`);
+        } catch (error) {
+            console.log('There was an error in updating.')
+        }
+    }
+
+    // Removes empty/unedited key value pairs from object
+    removeEmptyKeyVal = (obj) => {
+        let newObj = {};
+        Object.keys(obj).forEach((prop) => {
+            if (obj[prop] !== '') {
+                newObj[prop] = obj[prop]; 
+            }
+        })
+        return newObj;
+    }
 }
 
 module.exports = Queries;

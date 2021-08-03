@@ -10,6 +10,7 @@ const {menu, bookIDPrompt, editPrompt} = require('./src/inquirer');
 const Queries = require('./src/Queries');
 const db = new Queries;
 
+// Starts the inquirer prompts
 const startPrompts = () => {
     inquirer.prompt(menu).then(answers => {
         userChoice(answers.choice);
@@ -45,26 +46,32 @@ const userChoice = (choice) => {
     }
 }
 
+// Display all books in DB
 const getAllBooks = async () => {
     await db.showBooks('view');
     startPrompts();
 }
 
+// Displays all books and prompts user to edit book. 
+// Passes in array of current book IDs to validate input
 const editBook = async () => {
     await db.showBooks('edit');
-    let currentIDArray = await db.getAllBookIDs();
-    inquirer.prompt(bookIDPrompt(currentIDArray)).then(answers => {
-        if (!answers.id) {
-            startPrompts();
-        } else {
-            // Get answers.id book data
-            inquirer.prompt(editPrompt).then(answers => {
-                console.log(answers.title)
-                console.log(answers.author)
-                console.log(answers.description)
-            })
-        }
-    })
+    const currentIDArray = await db.getAllBookIDs();
+    const bookID = await inquirer.prompt(bookIDPrompt(currentIDArray));
+
+    // If the user presses enter to exit, go back to menu
+    if (!bookID.id) { 
+        startPrompts();
+    } else {
+        // Retrieves book data and pass it to editPrompt to render inquirer prompt values to edit
+        const bookData = await db.getOneBook(bookID.id);
+        const updatedAns = await inquirer.prompt(editPrompt(bookData));
+
+        // Pass only updated columns into update query
+        const updatedVals = db.removeEmptyKeyVal(updatedAns);
+        await db.editBook(bookID.id, updatedVals);
+        startPrompts();
+    }
 }
 
 // Connects to the db and starts the prompts
