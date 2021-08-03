@@ -3,6 +3,14 @@
 // Import dependencies
 const inquirer = require('inquirer');
 
+// Validation for if the user doesn't enter a value
+const validateInput = (input) => { 
+    if(!input) {
+        return "Please enter a value.";
+    }
+    return true;
+}
+
 // Menu choices
 const menu = [ 
     { 
@@ -26,44 +34,23 @@ const addPrompt = [
         message: '\nPlease enter the following information: \n      Title:',
         default: '',
         prefix: '',
+        validate: validateInput
     },
     {
         name: 'author',
         message: '     Author:',
         default: '',
         prefix: '',
+        validate: validateInput
     },
     {
         name: 'description',
         message: '     Description:',
         default: '',
         prefix: '',
+        validate: validateInput
     }     
 ]
-
-// Takes in the current array of IDs in the DB
-// Returns an inquirer prompt with validation for the ID and checks if the user pressed enter to return to menu
-const bookIDPrompt = (array) => {
-    const checkForValidID = (input) => {
-        // Checks if the user pressed enter
-        if (!input) {
-            return true;
-        } else if (!array.includes(input)) {
-            return "Please enter a valid book ID.";
-
-        }
-        return true;
-    }
-    return [
-        {
-            name: 'id',
-            message: '\nEnter the book ID of the book you want to edit; to return press <Enter>. \n\nBook ID:',
-            type: 'input',
-            prefix: '',
-            validate: checkForValidID
-        }
-    ]
-}
 
 // Takes in the book data from the user and returns a prompt with book values
 const editPrompt = (data) => {
@@ -86,6 +73,30 @@ const editPrompt = (data) => {
             default: '',
             prefix: '',
         },
+    ]
+}
+
+// Takes in the current array of IDs in the DB
+// Returns an inquirer prompt with validation for the ID and checks if the user pressed enter to return to menu
+const bookIDPrompt = (array) => {
+    const checkForValidID = (input) => {
+        // Checks if the user pressed enter
+        if (!input) {
+            return true;
+        } else if (!array.includes(input)) {
+            return "Please enter a valid book ID.";
+
+        }
+        return true;
+    }
+    return [
+        {
+            name: 'id',
+            message: '\nEnter the book ID of the book you want to edit; to return press <Enter>. \n\nBook ID:',
+            type: 'input',
+            prefix: '',
+            validate: checkForValidID
+        }
     ]
 }
 

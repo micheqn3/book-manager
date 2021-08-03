@@ -78,6 +78,16 @@ class Queries {
         }
     }
 
+    // Add a book
+    async addBookQ(obj) {
+        try {
+            const newBook = await Book.create(obj);
+            console.log(`\nBook [${newBook.id}] Saved`);
+        } catch (error) {
+            console.log('There was an error in adding the book.');
+        }
+    }
+
     // Removes empty/unedited key value pairs from object
     removeEmptyKeyValQ = (obj) => {
         let newObj = {};

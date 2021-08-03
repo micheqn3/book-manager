@@ -58,6 +58,8 @@ const getAllBooks = async () => {
 const addBook = async () => {
     await db.showHeaderQ('add');
     const data = await inquirer.prompt(addPrompt);
+    await db.addBookQ(data);
+    startPrompts();
 }
 
 // Displays all books and prompts user to edit book. 
