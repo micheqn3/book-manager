@@ -4,7 +4,7 @@
 const inquirer = require('inquirer');
 const sequelize = require('./config/connection');
 const Book = require('./models/Book');
-const {menu, bookIDPrompt, editPrompt, addPrompt, viewDetailPrompt} = require('./src/inquirer');
+const {menu, bookIDPrompt, editPrompt, addPrompt, viewDetailPrompt, keywordPrompt} = require('./src/inquirer');
 
 // Import class to use query methods
 const Queries = require('./src/Queries');

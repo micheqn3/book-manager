@@ -109,4 +109,14 @@ const bookIDPrompt = [
     }
 ]
 
-module.exports = {menu, addPrompt, bookIDPrompt, editPrompt, viewDetailPrompt}
+// Search keyword prompt
+const keywordPrompt = [
+    {
+        name: 'search',
+        message: 'Type in one or more keywords to search for \n\nSearch:',
+        type: 'input',
+        prefix: '',
+    }
+]
+
+module.exports = {menu, addPrompt, bookIDPrompt, editPrompt, viewDetailPrompt, keywordPrompt}
