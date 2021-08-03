@@ -41,6 +41,14 @@ class Queries {
         }
     }
 
+    // Formats book details for one book
+    formatBookDetailsQ(val) {
+        console.log(`     ID: ${val.id}`);
+        console.log(`     Title: ${val.title}`);
+        console.log(`     Author: ${val.author}`);
+        console.log(`     Description: ${val.description}`);
+    }
+
     // Retrieves all book ID's and pushes into array
     async getAllBookIDsQ() {
         try {

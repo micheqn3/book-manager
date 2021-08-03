@@ -68,6 +68,8 @@ const getAllBooks = async () => {
             console.log('\nPlease enter a valid ID.');
         } else {
             // Make query here
+            const book = await db.getOneBookQ(data.id);
+            db.formatBookDetailsQ(book);
         }
     } while (data.id.length > 0);
     startPrompts();

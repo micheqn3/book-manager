@@ -66,7 +66,7 @@ const addPrompt = [
 const viewDetailPrompt = [
     {
         name: 'id',
-        message: '\nTo view details enter the book ID, to return press <Enter>.',
+        message: '\nTo view details enter the book ID, to return press <Enter>.\n',
         default: '',
         prefix: '',
     }     
