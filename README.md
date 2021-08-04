@@ -40,6 +40,8 @@ This application is run through the command line and allows the user to:
 
 ### Walkthrough Demo
 
+https://user-images.githubusercontent.com/68047684/128104307-5c45a1ac-6692-408c-8c9b-bb730e37b993.mp4
+
 ### License [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 MIT 
