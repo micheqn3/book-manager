@@ -103,16 +103,22 @@ const searchBook = async () => {
     console.log('\nThe following books matched your query. Enter the book ID to see more details, or <Enter> to return.\n')
     db.formatBookDataQ(results);
     do {
-        // Allow the user to keep entering book IDs to view details
-        // If they press enter, they will be taken back to the menu
+        // Allow the user to keep entering book IDs to view details. Take them back to menu with enter press
+        // If user input ID is valid, display book data
         bookID = await inquirer.prompt(searchIDPrompt);
+        const allBookIDs = await db.getAllBookIDsQ();
         if (bookID.id === "") {
             startPrompts();
             return;
         } 
-        const book = await db.getOneBookQ(bookID.id);
-        db.formatBookDetailsQ(book);
-
+        const isInDB = db.isBookIDInDB(bookID.id, allBookIDs);
+        if (!isInDB) {
+            console.log('\nPlease enter a valid ID.');
+        } else {
+            // Retrieve single book data and display to user
+            const book = await db.getOneBookQ(bookID.id);
+            db.formatBookDetailsQ(book);
+        }
     } while (bookID.id.length > 0);
 }
 
