@@ -5,27 +5,27 @@ const books = [
     {
         "title": "Paper Towns",
         "author": "John Green",
-        "description": 'A coming of age story.'
+        "description": 'A Coming Of Age Story.'
     },
     {
         "title": "Eat A Peach",
         "author": "David Chang",
-        "description": "Chef David Chang's memoir."
+        "description": "Chef David Chang's Memoir."
     },
     {
         "title": "Kitchen Confidential",
         "author": "Anthony Bourdain",
-        "description": "A book about the long and perilous road Bourdain took to become a chef at a fancy restaurant in Manhattan."
+        "description": "A Book About The Long And Perilous Road Bourdain Took To Become A Chef At A Fancy Restaurant In Manhattan."
     },
     {
         "title": "The Great Gatsby",
         "author": "F. Scott Fitzgerald",
-        "description": "The tragic story of Jay Gatsby, a self-made millionaire, and his pursuit of Daisy Buchanan."
+        "description": "The Tragic Story Of Jay Gatsby, A Self-made Millionaire, And His Pursuit Of Daisy Buchanan."
     },
     {
         "title": "Eat Pray Love",
         "author": "Elizabeth Gilbert",
-        "description": "Liz embarks on a quest of self-discovery that takes her to Italy, India and Bali."
+        "description": "Liz Embarks On A Quest Of Self-discovery That Takes Her To Italy, India And Bali."
     },
 ]
 

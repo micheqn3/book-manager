@@ -1,4 +1,4 @@
-/* Initialize connection to MySQL database */
+/* Initialize connection to MySQL database using Sequelize */
 
 // Import sequelize
 const Sequelize = require('sequelize');
