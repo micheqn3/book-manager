@@ -10,6 +10,19 @@ const {menu, bookIDPrompt, editPrompt, addPrompt, viewDetailPrompt, keywordPromp
 const Queries = require('./src/Queries');
 const db = new Queries;
 
+// Connects to the db 
+const connection = async () => {
+    try {
+        await sequelize.sync({ force: false });
+        console.log('DB connection is successful.\n');
+        const numofBooks = await db.getAllBookIDsQ();
+        console.log(`Loaded ${numofBooks.length} books into the library`);
+        startPrompts();
+    } catch (error) {
+        console.log(`There was an issue with the DB connection: ${error}`);
+    }
+}
+
 // Starts the inquirer prompts
 const startPrompts = async () => {
     try {
@@ -150,19 +163,6 @@ const editBook = async () => {
         }
     } while (data.id.length > 0);
     startPrompts();
-}
-
-// Connects to the db and starts the prompts
-const connection = async () => {
-    try {
-        await sequelize.sync({ force: false });
-        console.log('DB connection is successful.\n');
-        const numofBooks = await db.getAllBookIDsQ();
-        console.log(`Loaded ${numofBooks.length} books into the library`);
-        startPrompts();
-    } catch (error) {
-        console.log(`There was an issue with the DB connection: ${error}`);
-    }
 }
 
 connection();
