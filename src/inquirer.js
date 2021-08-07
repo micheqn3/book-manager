@@ -21,18 +21,17 @@ const capEachWord = (str) => {
 
 // Menu choices
 const menu = [ 
-    { 
+    {
         name: 'choice',
-        message: '\n= = = = Book Manager = = = =\n',
-        type: 'list',
-        prefix: '',
-        choices: [ 
-            "     1) View all books",
-            "     2) Add a book",
-            "     3) Edit a book",
-            "     4) Search for a book", 
-            "     5) Save and exit", 
-        ]   
+        message: 
+        `\n= = = = Book Manager = = = =\n
+        1) View all books
+        2) Add a book
+        3) Edit a book
+        4) Search for a book
+        5) Save and exit\n`,
+        suffix: '\nChoose [1-5]:',
+        prefix: ''
     }
 ]
 

@@ -40,24 +40,25 @@ const startPrompts = async () => {
 // Redirects the menu based on the user's input
 const userChoice = (choice) => {
     switch (choice.trim()) {
-        case '1) View all books':
+        case '1':
             getAllBooks();
             break;
-        case '2) Add a book': 
+        case '2': 
             addBook();
             break;
-        case '3) Edit a book': 
+        case '3': 
             editBook();
             break;
-        case '4) Search for a book':
+        case '4':
             searchBook();
             break;
-        case '5) Save and exit':
+        case '5':
             console.log('\nLibrary saved.');
             process.exit();
             break;
         default: 
-            console.log('There was an error.');
+            console.log('\nPlease choose 1-5.');
+            startPrompts();
     }
 }
 
