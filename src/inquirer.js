@@ -30,6 +30,7 @@ const menu = [
         3) Edit a book
         4) Search for a book
         5) Save and exit\n`,
+        type: 'input',
         suffix: '\nChoose [1-5]:',
         prefix: ''
     }
@@ -42,6 +43,7 @@ const addPrompt = [
         message: '\nPlease enter the following information: \n      Title:',
         default: '',
         prefix: '',
+        type: 'input',
         validate: validateInput,
         filter: capEachWord
     },
@@ -50,6 +52,7 @@ const addPrompt = [
         message: '     Author:',
         default: '',
         prefix: '',
+        type: 'input',
         validate: validateInput,
         filter: capEachWord
     },
@@ -58,8 +61,9 @@ const addPrompt = [
         message: '     Description:',
         default: '',
         prefix: '',
+        type: 'input',
         validate: validateInput,
-        filter: capEachWord
+        filter: capEachWord,
     }     
 ]
 
@@ -70,6 +74,7 @@ const viewDetailPrompt = [
         message: '\nTo view details enter the book ID, to return press <Enter>.\n',
         default: '',
         prefix: '',
+        type: 'input',
     }     
 ]
 
@@ -81,6 +86,7 @@ const editPrompt = (data) => {
             message: `\nInput the following information. To leave a field unchanged, hit <Enter> \n\n      Title [${data.title}]:`,
             default: '',
             prefix: '',
+            type: 'input',
             filter: capEachWord,
         },
         {
@@ -88,6 +94,7 @@ const editPrompt = (data) => {
             message: `     Author: [${data.author}]:`,
             default: '',
             prefix: '',
+            type: 'input',
             filter: capEachWord,
         },
         {
@@ -95,6 +102,7 @@ const editPrompt = (data) => {
             message: `     Description: [${data.description}]:`,
             default: '',
             prefix: '',
+            type: 'input',
             filter: capEachWord,
         },
     ]
