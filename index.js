@@ -70,7 +70,7 @@ const getAllBooks = async () => {
         startPrompts();
         return;
     }
-    await db.showHeaderQ('view');
+    db.showHeaderQ('view');
     await db.displayBooksQ();
     let data;
     do {
@@ -96,7 +96,7 @@ const getAllBooks = async () => {
 
 // Add a book to the DB
 const addBook = async () => {
-    await db.showHeaderQ('add');
+    db.showHeaderQ('add');
     const data = await inquirer.prompt(addPrompt);
     await db.addBookQ(data);
     startPrompts();
@@ -104,7 +104,7 @@ const addBook = async () => {
 
 // Search for keywords
 const searchBook = async () => {
-    await db.showHeaderQ('search');
+    db.showHeaderQ('search');
     const data = await inquirer.prompt(keywordPrompt);
     const results = await db.searchQ(data.search);
 
@@ -138,7 +138,7 @@ const searchBook = async () => {
 
 // Displays all books and prompts user to edit book until they press enter
 const editBook = async () => {
-    await db.showHeaderQ('edit');
+    db.showHeaderQ('edit');
     await db.displayBooksQ();
     let data;
     do {

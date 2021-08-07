@@ -6,7 +6,7 @@ const Book = require('../models/Book');
 class Queries {
 
     // Displays specified header for CRUD operation
-    async showHeaderQ(operation) {
+    showHeaderQ(operation) {
         switch (operation) {
             case 'view':
                 console.log('\n= = = = View Books = = = =\n');
