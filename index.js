@@ -91,7 +91,6 @@ const getAllBooks = async () => {
             db.formatBookDetailsQ(book);
         }
     } while (data.id.length > 0);
-    startPrompts();
 }
 
 // Add a book to the DB
@@ -114,7 +113,7 @@ const searchBook = async () => {
         return;
     } 
     let bookID;
-    console.log('\nThe following books matched your query. Enter the book ID to see more details, or <Enter> to return.\n')
+    console.log('\nThe following books matched your query. Enter the book ID to see more details, or <Enter> to return.\n');
     db.formatBookDataQ(results);
     do {
         // Allow the user to keep entering book IDs to view details. Take them back to menu with enter press
@@ -163,7 +162,6 @@ const editBook = async () => {
             await db.editBookQ(data.id, updatedVals);
         }
     } while (data.id.length > 0);
-    startPrompts();
 }
 
 connection();
