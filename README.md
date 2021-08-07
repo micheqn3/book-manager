@@ -40,7 +40,7 @@ This application is run through the command line and allows the user to:
 
 ### Walkthrough Demo
 
-https://user-images.githubusercontent.com/68047684/128105222-01892e21-dd42-45df-8dd6-f25f31e66be5.mp4
+https://user-images.githubusercontent.com/68047684/128582502-7e0f24de-1b49-4e95-9276-eb4c295890cb.mp4
 
 ### License [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
