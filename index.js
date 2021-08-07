@@ -106,8 +106,7 @@ const searchBook = async () => {
     db.showHeaderQ('search');
     const data = await inquirer.prompt(keywordPrompt);
     const results = await db.searchQ(data.search);
-
-    if (!results.length > 0) {
+    if (results.length === 0) {
         console.log('\nThere were no books that match your search.');
         startPrompts();
         return;
